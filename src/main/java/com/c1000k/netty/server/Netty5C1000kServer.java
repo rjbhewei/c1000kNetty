@@ -21,9 +21,9 @@ public class Netty5C1000kServer {
 
     private static final Logger logger = LoggerFactory.getLogger(Netty5C1000kServer.class);
 
-    private static final int PORT = 8080;
+    //private static final int PORT = 8080;
 
-    public void start() throws InterruptedException {
+    public void start(String localIp, int port) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -36,8 +36,8 @@ public class Netty5C1000kServer {
             bootstrap.channel(NioServerSocketChannel.class);
             bootstrap.handler(new LoggingHandler(LogLevel.INFO));
             bootstrap.childHandler(new WebSocketServerInitializer());
-            Channel ch = bootstrap.bind(PORT).sync().channel();
-            logger.info("web socket port:{}", PORT);
+            Channel ch = bootstrap.bind(localIp, port).sync().channel();
+            logger.info("web socket port:{}", port);
             ch.closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
@@ -46,6 +46,11 @@ public class Netty5C1000kServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new Netty5C1000kServer().start();
+        if(args == null || args.length != 2) {
+            return;
+        }
+        String localIp = args[0];
+        int port = Integer.parseInt(args[1]);
+        new Netty5C1000kServer().start(localIp,port);
     }
 }
