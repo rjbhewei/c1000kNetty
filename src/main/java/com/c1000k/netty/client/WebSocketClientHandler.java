@@ -35,7 +35,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-        logger.info("WebSocket Client disconnected!");
+        //logger.info("WebSocket Client disconnected!");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
         Channel ch = ctx.channel();
         if(!handshaker.isHandshakeComplete()) {
             handshaker.finishHandshake(ch, (FullHttpResponse) msg);
-            logger.info("WebSocket Client connected!");
+            //logger.info("WebSocket Client connected!");
             handshakeFuture.setSuccess();
             return;
         }
@@ -55,9 +55,9 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
         WebSocketFrame frame = (WebSocketFrame) msg;
         if(frame instanceof TextWebSocketFrame) {
             TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
-            logger.info("WebSocket Client received message: " + textFrame.text());
+            //logger.info("WebSocket Client received message: " + textFrame.text());
         } else if(frame instanceof CloseWebSocketFrame) {
-            logger.info("WebSocket Client received closing");
+            //logger.info("WebSocket Client received closing");
             ch.close();
         }
     }
