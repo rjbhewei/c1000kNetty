@@ -53,5 +53,5 @@ echo "CLASSPATH : $CLASSPATH"
 echo "JAVA_OPTS : $JAVA_OPTS"
 
 cd $LOGTRACE_HOME
-exec java $JAVA_OPTS -cp $CLASSPATH com.shuyun.trace.example.apachehttpclient.HelloWoldHttpClient >> "$LOGTRACE_OUT" 2>&1 &
+exec java $JAVA_OPTS -cp $CLASSPATH com.c1000k.netty.client.Netty5C1000kClient >> "$LOGTRACE_OUT" 2>&1 &
 
