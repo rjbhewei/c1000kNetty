@@ -116,14 +116,15 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
             public void run() {
                 int size = GROUP.size();
                 if(size > 0) {
+                    long start = System.currentTimeMillis();
                     logger.info("push channel size :{}", size);
                     for(Channel c : GROUP) {
                         c.writeAndFlush(new TextWebSocketFrame("zzzzz"));
                     }
-                    logger.info("push channel over");
+                    logger.info("push channel over and span time:{}", System.currentTimeMillis() - start);
                 }
             }
-        }, 0, 5, TimeUnit.SECONDS);//无推送的情况
+        }, 0, 30, TimeUnit.SECONDS);//无推送的情况
     }
 
     @Override
