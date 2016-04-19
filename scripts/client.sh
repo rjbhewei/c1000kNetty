@@ -53,5 +53,5 @@ echo "CLASSPATH : $CLASSPATH"
 echo "JAVA_OPTS : $JAVA_OPTS"
 
 cd $LOGTRACE_HOME
-exec java $JAVA_OPTS -cp $CLASSPATH com.c1000k.netty.client.Netty5C1000kClient "172.18.2.100" "10000" "127.0.0.1" "8080">> "$LOGTRACE_OUT" 2>&1 &
+exec java $JAVA_OPTS -cp $CLASSPATH com.c1000k.netty.client.Netty5C1000kClient "172.18.2.100" "10000" "172.18.2.127" "8082">> "$LOGTRACE_OUT" 2>&1 &
 
